@@ -1,25 +1,21 @@
 package algoexpert
 
-import "sort"
-
 func IsValidSubsequence(array, sequence []int) bool {
-	indiciesByValue := map[int][]int{}
-
-	for i, v := range array {
-		indiciesByValue[v] = append(indiciesByValue[v], i)
+	if len(sequence) > len(array) {
+		return false
 	}
 
-	var indicies []int
+	var currentIndex int
 
-	for _, v := range sequence {
-		if indexes, present := indiciesByValue[v]; !present || len(indexes) == 0 {
-			return false
-		} else {
-			indicies = append(indicies, indexes[0])
-			indexes = indexes[1:]
-			indiciesByValue[v] = indexes
+	for _, v := range array {
+		if v == sequence[currentIndex] {
+			currentIndex++
+		}
+
+		if currentIndex >= len(sequence) {
+			break
 		}
 	}
 
-	return sort.IntsAreSorted(indicies)
+	return currentIndex >= len(sequence)
 }
