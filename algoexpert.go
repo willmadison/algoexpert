@@ -13,9 +13,9 @@ func IsValidSubsequence(array, sequence []int) bool {
 		}
 
 		if currentIndex >= len(sequence) {
-			break
+			return true
 		}
 	}
 
-	return currentIndex >= len(sequence)
+	return false
 }
