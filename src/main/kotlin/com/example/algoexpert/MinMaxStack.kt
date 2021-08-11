@@ -21,7 +21,7 @@ class MinMaxStack {
             return
         }
 
-        val top = entries[entries.size-1]
+        val top = entries[entries.lastIndex]
 
         val min = if (value < top.min()) value else top.min()
         val max = if (value > top.max()) value else top.max()
@@ -40,7 +40,7 @@ class MinMaxStack {
             throw IllegalAccessException("no such elements")
         }
 
-        return entries.removeAt(entries.size-1).value()
+        return entries.removeAt(entries.lastIndex).value()
     }
 
     fun peek(): Int {
@@ -48,7 +48,7 @@ class MinMaxStack {
             throw IllegalAccessException("no such elements")
         }
 
-        return entries[entries.size-1].value()
+        return entries[entries.lastIndex].value()
     }
 
     fun getMax(): Int {
@@ -56,7 +56,7 @@ class MinMaxStack {
             throw IllegalAccessException("no such elements")
         }
 
-        return entries[entries.size-1].max()
+        return entries[entries.lastIndex].max()
     }
 
     fun getMin(): Int {
@@ -64,7 +64,7 @@ class MinMaxStack {
             throw IllegalAccessException("no such elements")
         }
 
-        return entries[entries.size-1].min()
+        return entries[entries.lastIndex].min()
     }
 
 }
