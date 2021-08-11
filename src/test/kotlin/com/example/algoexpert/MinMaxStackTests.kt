@@ -1,6 +1,7 @@
 package com.example.algoexpert
 
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
 
 class MinMaxStackTests {
@@ -53,5 +54,14 @@ class MinMaxStackTests {
 
         stack.push(-33)
         assertThat(stack.getMin()).isEqualTo(-33)
+    }
+
+    @Test
+    internal fun `it throws IllegalAccessExceptions for invalid operations`() {
+        val stack = MinMaxStack()
+
+        assertThrows(IllegalAccessException::class.java) {
+            stack.pop()
+        }
     }
 }

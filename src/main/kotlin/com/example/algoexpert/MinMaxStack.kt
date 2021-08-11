@@ -37,7 +37,7 @@ class MinMaxStack {
 
     fun pop(): Int {
         if (entries.isEmpty()) {
-            throw IllegalStateException("no such elements")
+            throw IllegalAccessException("no such elements")
         }
 
         return entries.removeAt(entries.size-1).value()
@@ -45,7 +45,7 @@ class MinMaxStack {
 
     fun peek(): Int {
         if (entries.isEmpty()) {
-            throw IllegalStateException("no such elements")
+            throw IllegalAccessException("no such elements")
         }
 
         return entries[entries.size-1].value()
@@ -53,7 +53,7 @@ class MinMaxStack {
 
     fun getMax(): Int {
         if (entries.isEmpty()) {
-            throw IllegalStateException("no such elements")
+            throw IllegalAccessException("no such elements")
         }
 
         return entries[entries.size-1].max()
@@ -61,7 +61,7 @@ class MinMaxStack {
 
     fun getMin(): Int {
         if (entries.isEmpty()) {
-            throw IllegalStateException("no such elements")
+            throw IllegalAccessException("no such elements")
         }
 
         return entries[entries.size-1].min()
