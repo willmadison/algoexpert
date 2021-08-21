@@ -77,8 +77,16 @@ func (o *orgChartQueue) IsEmpty() bool {
 type Ancestry []string
 
 func GetLowestCommonManager(org, reportOne, reportTwo *OrgChart) *OrgChart {
-	firstAncestry, employeesByName := determineAncestry(org, reportOne)
-	secondAncestry, _ := determineAncestry(org, reportTwo)
+	var employeesByName map[string]*OrgChart
+
+	firstAncestry, lookupA := determineAncestry(org, reportOne)
+	secondAncestry, lookupB := determineAncestry(org, reportTwo)
+
+	employeesByName = lookupA
+
+	if len(lookupB) > len(employeesByName) {
+		employeesByName = lookupB
+	}
 
 	var lowestCommonManagerName string
 
