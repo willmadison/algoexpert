@@ -52,3 +52,52 @@ func TestIsValidSubsequence(t *testing.T) {
 	}
 
 }
+
+func TestGetLowestCommonManager(t *testing.T) {
+	e := &algoexpert.OrgChart{Name: "E"}
+	f := &algoexpert.OrgChart{Name: "F"}
+	g := &algoexpert.OrgChart{Name: "G"}
+	h := &algoexpert.OrgChart{Name: "H"}
+	i := &algoexpert.OrgChart{Name: "I"}
+	d := &algoexpert.OrgChart{Name: "D", DirectReports: []*algoexpert.OrgChart{h, i}}
+	c := &algoexpert.OrgChart{Name: "C", DirectReports: []*algoexpert.OrgChart{f, g}}
+	b := &algoexpert.OrgChart{Name: "B", DirectReports: []*algoexpert.OrgChart{d, e}}
+	a := &algoexpert.OrgChart{Name: "A", DirectReports: []*algoexpert.OrgChart{b, c}}
+
+	org := a
+
+	cases := []struct {
+		given struct {
+			org, reportOne, reportTwo *algoexpert.OrgChart
+		}
+		expected *algoexpert.OrgChart
+	}{
+		{
+			struct {
+				org, reportOne, reportTwo *algoexpert.OrgChart
+			}{
+				org:       org,
+				reportOne: e,
+				reportTwo: i,
+			},
+			b,
+		},
+		{
+			struct {
+				org, reportOne, reportTwo *algoexpert.OrgChart
+			}{
+				org:       org,
+				reportOne: d,
+				reportTwo: g,
+			},
+			a,
+		},
+	}
+
+	for _, tc := range cases {
+		t.Run(fmt.Sprintf("GetLowestCommonManager(%v, %v, %v)", tc.given.org, tc.given.reportOne, tc.given.reportTwo), func(t *testing.T) {
+			actual := algoexpert.GetLowestCommonManager(tc.given.org, tc.given.reportOne, tc.given.reportTwo)
+			assert.Equal(t, tc.expected, actual)
+		})
+	}
+}
