@@ -104,7 +104,6 @@ func GetLowestCommonManager(org, reportOne, reportTwo *OrgChart) *OrgChart {
 func determineAncestry(root, target *OrgChart) (Ancestry, map[string]*OrgChart) {
 	queue := NewOrgChartQueue()
 
-	var ancestry Ancestry
 	var current *OrgChart
 
 	managersByEmployee := map[string]*OrgChart{
@@ -129,6 +128,9 @@ func determineAncestry(root, target *OrgChart) (Ancestry, map[string]*OrgChart) 
 	}
 
 	manager := managersByEmployee[target.Name]
+
+	var ancestry Ancestry
+	ancestry = append(ancestry, target.Name)
 
 	for manager != nil {
 		ancestry = append(ancestry, manager.Name)
