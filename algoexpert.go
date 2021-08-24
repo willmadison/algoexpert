@@ -162,8 +162,8 @@ var lettersByDigit = map[rune][]string{
 }
 
 func PhoneNumberMnemonics(phoneNumber string) []string {
-	if len(phoneNumber) == 0 {
-		return []string{""}
+	if len(phoneNumber) == 1 {
+		return lettersByDigit[rune(phoneNumber[0])]
 	}
 
 	var mnemonics []string
