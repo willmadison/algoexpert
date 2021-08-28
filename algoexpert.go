@@ -180,3 +180,31 @@ func PhoneNumberMnemonics(phoneNumber string) []string {
 
 	return mnemonics
 }
+
+func HasSingleCycle(values []int) bool {
+	visited := map[int]struct{}{}
+
+	var current int
+
+	for {
+		if _, seen := visited[current]; !seen {
+			visited[current] = struct{}{}
+		} else {
+			return len(visited) == len(values) && current == 0
+		}
+
+		step := values[current] % len(values)
+
+		current += step
+
+		if current < 0 {
+			current += len(values)
+		}
+
+		if current >= len(values) {
+			current -= len(values)
+		}
+	}
+
+	return false
+}
